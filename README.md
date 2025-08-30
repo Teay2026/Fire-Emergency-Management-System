@@ -4,11 +4,19 @@
 
 An intelligent fire emergency management system developed by **"Les Flambis"** team. It simulates and optimizes the management of fire vehicles, fires, and fire stations with a real-time web supervision interface.
 
-**Youtube Demo** : https://www.youtube.com/watch?v=gfaORGjdIyU
+<!-- Clickable thumbnail that opens the YouTube demo -->
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=gfaORGjdIyU" target="_blank">
+    <img src="https://img.youtube.com/vi/gfaORGjdIyU/maxresdefault.jpg" alt="YouTube Demo – Les Flambis" width="900">
+  </a>
+</p>
 
 ## 🏗️ System Architecture
 
-<img src="ProjetMajeure/Diagramme_archi.svg" alt="Logo" width="200"/>
+<p align="center">
+  <img src="ProjetMajeure/Diagramme_archi.svg" alt="System Architecture Diagram" width="900">
+</p>
+
 
 ### Backend (Spring Boot)
 - **Framework**: Spring Boot 3.3.0
