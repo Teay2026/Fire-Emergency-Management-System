@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Les Flambis</title>
+    <meta name="description" content="Fire Supervision Web interface"/>
+    <meta name="author" content="Les Flambis"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../icons/flan.png">
+
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="column column-1">
+
+        <!-- Header and Controls -->
+        <div class="header">
+            <h1>Fire Supervision Interface</h1>
+            <div class="controls">
+                <div class="fireFilters">
+                    <label for="fireTypeFilter">By fire type</label>
+                    <select id="fireTypeFilter">
+                        <option value="All">All</option>
+                        <option value="A">A</option>
+                        <option value="B_Gasoline">B - Gasoline</option>
+                        <option value="B_Alcohol" >B - Alcohol</option>
+                        <option value="B_Plastics">B - Plastics</option>
+                        <option value="C_Flammable_Gases">C - Flammable Gases</option>
+                        <option value="D_Metals">D - Metals</option>
+                        <option value="E_Electric">E - Electric</option>
+                    </select>
+                    <div class="rangeSlider"> Max Range:
+                        <input type="range" min="1" max="100" value="50" class="slider" id="rangeSlider">
+                        <p id="rangeText">50</p>
+                    </div>
+                    
+                    <div class="intensitySlider">Max Intensity:
+                        <input type="range" min="1" max="100" value="50" class="slider" id="intensitySlider">
+                        <p id="intensityText">50</p>
+                    </div>
+                </div>
+                <div>
+                    <label for="vehicleTypeFilter">By vehicle Type:</label>
+                    <select id="vehicleTypeFilter">
+                        <option value="All">All</option>
+                        <option value="CAR">Car</option>
+                        <option value="FIRE_ENGINE">Fire Engine</option>
+                        <option value="PUMPER_TRUCK" >Pumper Truck</option>
+                        <option value="WATER_TENDERS">Water Tender</option>
+                        <option value="TURNTABLE_LADDER_TRUCK">Turntable Ladder Truck</option>
+                        <option value="TRUCK">Truck</option>
+                </select>
+                </div>
+                
+                <div>
+                    <label for="facilityTypeFilter">By Facilty:</label>
+                    <select id="facilityTypeFilter">
+                        <option value="All">All</option>
+                        <option value="OURS">Ours</option>
+                        <option value="OTHERS">Others</option>
+                        <option value="102">102</option>
+                        <option value="156" >156</option>
+                    </select>
+                </div>
+                <button id="moveAllToBaseButton">Move All to Base</button>
+                <button id="deployButton">Deploy</button>
+            </div>
+        </div>
+
+        <!-- Leaflet Map -->
+        <div id="map"></div>
+    </div>
+
+    <div class="column column-2">
+
+        <!-- Right Sidebar for the vehicles control -->
+        <div class="sidebar" id="sidebar">
+            <h2>Vehicle Management</h2>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'Create')">Create</button>
+                <button class="tablinks" onclick="openTab(event, 'Delete')">Delete</button>
+                <button class="tablinks" onclick="openTab(event, 'Update')">Update</button>
+                <button class="tablinks"onclick= "openTab(event, 'Move')">Move</button>
+            </div>
+
+            <!-- Tab content -->
+            <!-- Vehicle creation -->
+            <div id="Create" class="tabcontent">
+                <h3>Create a new vehicle</h3>
+                <form id="newVehicleForm">
+
+                    <label for="newVehicleType">Type:</label>
+                    <select id="newVehicleType" name="newVehicleType" required>
+                        <option value="type1">Car</option>
+                        <option value="type2">Fire Engine</option>
+                        <option value="type3">Pumper Truck</option>
+                        <option value="type4">Water Tender</option>
+                        <option value="type5">Turntable Ladder Truck</option>
+                        <option value="type6">Truck</option>
+                    </select>
+
+                    <label for="newVehicleLiquidType">Liquide Type:</label>
+                    <select id="newVehicleLiquidType" required>
+                        <option value="WATER">Water</option>
+                        <option value="FOAM">Foam</option>
+                        <option value="CARBON_DIOXYDE">Carbon dioxyde</option>
+                        <option value="POWDER">Powder</option>
+                        <option value="SPECIAL_POWDER">Special powder</option>
+                    </select>
+
+                    <label for="newVehicleFacility">Facility:</label>
+                    <select id="newVehicleFacility" required>
+                        <option value="102">Caserne 102</option>
+                        <option value="156">Caserne 156</option>
+                    </select>
+
+                    <label for="newVehicleCrewMembers">Crewmembers:</label>
+                    <input type="number" id="newVehicleCrewMembers" min="1" max="10" required />
+
+                    <button type="submit" id="addVehicleButton">Add</button>
+                </form>
+            </div>
+
+            <!-- Vehicle suppression -->
+            <div id="Delete" class="tabcontent">
+                <h3>Delete a vehicle</h3>
+                <select id="deleteVehicleChoice">
+                    <option value="none">Choose a vehicle</option>
+                </select>
+                <button id="deleteVehicleButton">Delete</button>
+            </div>
+
+            <!-- Vehicle modification -->
+            <div id="Update" class="tabcontent">
+                <h3>Update a vehicle</h3>
+                <select id="updateVehicleChoice">
+                    <option value="none">Choose a vehicle</option>
+                </select>
+                <form id="updateVehicleForm" style="display: none;">
+
+                    <label for="updateVehicleType">Type:</label>
+                    <select id="updateVehicleType" name="updateVehicleType" required>
+                        <option value="type1">Car</option>
+                        <option value="type2">Fire Engine</option>
+                        <option value="type3">Pumper truck</option>
+                        <option value="type4">Water Tender</option>
+                        <option value="type5">Turntable Ladder Truck</option>
+                        <option value="type6">Truck</option>
+                    </select>
+
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+          <!-- Move vehicle -->
+          <div id="Move" class="tabcontent">
+            <h3>Move a vehicle</h3>
+            <select id="moveVehicle">
+                <option value="none">Choose a vehicle</option>
+            </select>
+            <form id="moveVehicleForm" style="display: none;">
+                <h3>Map coordinates</h3>
+                <label for="NewLongitude">Longitude :</label>
+                <input type="number" id="NewLongitude" name="NewLongitude" step="0.0001" required>
+                <label for="NewLatitude">Latitude :</label>
+                <input type="number" id="NewLatitude" name="NewLatitude" step="0.0001" required>
+                <button type="submit">Move</button>
+            </form>
+          </div>
+            <!-- Dashboard for facilities and associated vehicles -->
+            <div class="dashboard">
+                <h2>Facility Dashboard</h2>
+                <div class="dashboard-table">
+                    <h4>Vehicles in Facility 102</h4>
+                    <table id="dashboard102">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>LiquidType</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dashboard-table">
+                    <h4>Vehicles in Facility 156</h'>
+                    <table id="dashboard156">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>LiquidType</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>   
+        </div>            
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin="">
+</script>
+<script src="Script/iconsLoader.js"></script>
+<script src="Script/dataManager.js"></script>
+<script src="Script/tabManager.js"></script>
+<script src="Script/dashboard.js"></script>
+<script src="Script/buttonsmanager.js"></script>
+
+<script src="Script/main.js"></script>
+</body>
+</html>
