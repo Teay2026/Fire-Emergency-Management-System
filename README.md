@@ -1,12 +1,14 @@
-# ProjetMajeure - Fire Emergency Management System
-
-![Fire Management System](icons/flan.png)
+# Fire Emergency Management System
 
 ## 🔥 Overview
 
-**ProjetMajeure** is an intelligent fire emergency management system developed by **"Les Flambis"** team. It simulates and optimizes the management of fire vehicles, fires, and fire stations with a real-time web supervision interface.
+An intelligent fire emergency management system developed by **"Les Flambis"** team. It simulates and optimizes the management of fire vehicles, fires, and fire stations with a real-time web supervision interface.
+
+**Youtube Demo** : https://www.youtube.com/watch?v=gfaORGjdIyU
 
 ## 🏗️ System Architecture
+
+<img src="ProjetMajeure/Diagramme_archi.svg" alt="Logo" width="200"/>
 
 ### Backend (Spring Boot)
 - **Framework**: Spring Boot 3.3.0
