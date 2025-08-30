@@ -14,7 +14,7 @@ An intelligent fire emergency management system developed by **"Les Flambis"** t
 ## 🏗️ System Architecture
 
 <p align="center">
-  <img src="ProjetMajeure/Diagramme_archi.svg" alt="System Architecture Diagram" width="900">
+  <img src="ProjetMajeure/archi.png" alt="System Architecture Diagram" width="900">
 </p>
 
 
