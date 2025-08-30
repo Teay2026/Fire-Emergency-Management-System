@@ -81,42 +81,6 @@ ProjetMajeure/
 - E_Electric: Electrical equipment
 ```
 
-## 🛠️ Installation and Configuration
-
-### Prerequisites
-- Java 17+
-- Maven 3.6+
-- Modern web browser
-
-### Backend Installation
-```bash
-cd Services/
-./mvnw clean install
-./mvnw spring-boot:run
-```
-Server starts on `http://localhost:8080`
-
-### Web Interface Configuration
-```bash
-cd front-end/
-# Open page.html in a browser
-# Or use a local server:
-python -m http.server 3000
-```
-Interface accessible on `http://localhost:3000`
-
-### API Configuration
-Edit `Services/src/main/resources/application.properties`:
-```properties
-# External CPE API
-api.url.api=http://tp.cpe.fr:8081
-api.credentials.id=3
-api.credentials.teamuuid=17951cd8-eae6-4f67-be27-d7500039556e
-
-# OSRM routing service
-osrm.url=http://router.project-osrm.org
-```
-
 ## 🚀 Main Features
 
 ### 🚒 Vehicle Management
