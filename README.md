@@ -2,7 +2,9 @@
 
 ## 🔥 Overview
 
-An intelligent fire emergency management system developed by **"Les Flambis"** team. It simulates and optimizes the management of fire vehicles, fires, and fire stations with a real-time web supervision interface.
+An intelligent fire emergency management system developed by **"Les Flambis"** team. It simulates and optimizes the management of fire vehicles, fires, and fire stations with a real-time web supervision interface.  
+
+👉 *Click the image below to watch the demo on YouTube!*  
 
 <!-- Clickable thumbnail that opens the YouTube demo -->
 <p align="center">
@@ -10,6 +12,7 @@ An intelligent fire emergency management system developed by **"Les Flambis"** t
     <img src="https://img.youtube.com/vi/gfaORGjdIyU/maxresdefault.jpg" alt="YouTube Demo – Les Flambis" width="900">
   </a>
 </p>
+
 
 ## 🏗️ System Architecture
 
