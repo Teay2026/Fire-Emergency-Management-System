@@ -117,40 +117,6 @@ ProjetMajeure/
 - 📊 **Dashboards** with metrics
 - 🎛️ **Manual controls** for testing and demonstrations
 
-## 📡 REST API
-
-### Vehicles
-```http
-GET    /vehicles                    # List all vehicles
-GET    /vehicles/{id}               # Get vehicle details
-POST   /vehicles/{teamuuid}         # Create a vehicle
-PUT    /vehicles/{teamuuid}/{id}    # Update vehicle
-DELETE /vehicles/{teamuuid}/{id}    # Delete vehicle
-POST   /vehicles/move/{teamuuid}/{id} # Move vehicle
-POST   /vehicles/moveBackToBase/{id}  # Return to base
-```
-
-### Fires
-```http
-GET /fires                    # List all fires
-GET /fires/{id}/intensity     # Get fire intensity
-GET /firetypes               # Get available fire types
-```
-
-### Emergency Management
-```http
-POST /emergency/deploy/all-vehicles  # General deployment
-POST /emergency/start               # Start simulation
-POST /emergency/stop                # Stop simulation
-POST /emergency/moveAllBackToBase   # General return to base
-```
-
-### Fire Stations
-```http
-GET /facility           # List fire stations
-GET /facility/{id}      # Get station details
-GET /facility/object/{id} # Get complete station object
-```
 
 ## 🔧 Technologies Used
 
@@ -171,24 +137,6 @@ GET /facility/object/{id} # Get complete station object
 - **OSRM** - Optimized route calculation
 - **CPE API** - External system interface
 
-## 🚦 Vehicle States
-
-```javascript
-// Possible statuses
-- IDLE: Waiting at base
-- ON_MISSION: On intervention mission  
-- MOVING: Moving towards target
-- REFUELING: Being refueled
-- EXTINGUISHING: Extinguishing a fire
-```
-
-## 📊 Metrics and Monitoring
-
-- **Real-time position** of all vehicles
-- **Fuel and liquid levels** per vehicle
-- **Fire intensity** with history
-- **Intervention efficiency** by type
-- **Average response time** by zone
 
 ## 🔒 Security and Configuration
 
